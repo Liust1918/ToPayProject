@@ -1,0 +1,25 @@
+spring:
+  datasource:
+    username: root
+    password: abc123456
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/topay?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
+#    微服务配置中心为项目统一配置(满足yyyy-MM-dd HH:mm:ss格式)
+#  原本格式yyyy-MM-dd HH:mm:ss不支持
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+##出现404错误 直接抛出NoHandlerFoundException
+  mvc:
+   throw-exception-if-no-handler-found: true
+   # 关闭默认资源映射，会导致static静态资源无法映射
+  web:
+    resources:
+      add-mappings: false
+mybatis:
+  mapper-locations: classpath:/mapper/*.xml
+  config-location: classpath:/mybatis-config.xml
+logging:
+  level:
+    com.liust: debug
+
