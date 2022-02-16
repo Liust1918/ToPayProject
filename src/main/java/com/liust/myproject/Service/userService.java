@@ -1,5 +1,6 @@
 package com.liust.myproject.Service;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.liust.myproject.Dao.userRepository;
 import com.liust.myproject.Pojo.userPojo;
 import org.apache.catalina.User;
@@ -30,6 +31,13 @@ public class userService {
 
     public userPojo getUserById(Integer user_id){
         userPojo userPojo = userRepository.selectById(user_id);
+        return userPojo;
+    }
+
+    public userPojo getUserByUserName(String username) {
+        QueryWrapper<userPojo> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("username", username);
+        userPojo userPojo = userRepository.selectOne(queryWrapper);
         return userPojo;
     }
 }

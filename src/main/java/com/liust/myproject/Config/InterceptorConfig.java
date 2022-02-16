@@ -1,9 +1,6 @@
 package com.liust.myproject.Config;
 
-import com.liust.myproject.MyInterceptor.timeLimitInterceptor;
-import com.liust.myproject.MyInterceptor.timesLimitInterceptor;
-import com.liust.myproject.MyInterceptor.valueLimitInterceptor;
-import com.liust.myproject.MyInterceptor.whiteListInterceptor;
+import com.liust.myproject.MyInterceptor.*;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -26,6 +23,9 @@ public class InterceptorConfig implements WebMvcConfigurer {
     @Resource
     private timesLimitInterceptor timesLimitInterceptor;
 
+    @Resource
+    private tokenInterceptor tokenInterceptor;
+
     private final String url="/pay/save";
 
     @Override
@@ -33,6 +33,9 @@ public class InterceptorConfig implements WebMvcConfigurer {
         //1.加入的顺序就是拦截器执行的顺序，
         //2.按顺序执行所有拦截器的preHandle
         //3.所有的preHandle 执行完再执行全部postHandle 最后是postHandle
+        registry.addInterceptor(tokenInterceptor)
+                .addPathPatterns("/**")
+                .excludePathPatterns(new String[]{"/user/login","/user/register"});
         registry.addInterceptor(whiteListInterceptor)
                 .addPathPatterns(url);
         registry.addInterceptor(timeLimitInterceptor)
