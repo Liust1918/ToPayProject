@@ -37,15 +37,13 @@ public class whiteListInterceptor implements HandlerInterceptor {
     @Resource
     private userService userService;
 
-    @Resource
-    private payController payController;
-
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 
         PayPojo payPojo = (PayPojo)JsonUtil.StreamToBean(request, PayPojo.class);
-        logger.info(payPojo.toString());
+        logger.info("用户:"+payPojo.getUserId()+" 白名单拦截");
         boolean present = Optional.ofNullable(payPojo).isPresent();
+
 
         if(!present){
             response.setContentType("application/json");

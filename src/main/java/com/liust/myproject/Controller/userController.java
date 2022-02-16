@@ -4,10 +4,7 @@ import com.liust.myproject.MyStatusCode.MyHttpState;
 import com.liust.myproject.MyStatusCode.R;
 import com.liust.myproject.Pojo.userPojo;
 import com.liust.myproject.Service.userService;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.Date;
@@ -38,6 +35,7 @@ public class userController {
         String s = userService.userTransactional(userPojo);
         return R.setResult(s, MyHttpState.Successful_Run);
     }
+
 
 
 }

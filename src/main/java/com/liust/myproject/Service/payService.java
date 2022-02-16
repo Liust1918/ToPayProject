@@ -86,5 +86,17 @@ public class payService {
         return collect;
     }
 
+    /**
+     * 获得用户交易次数
+     *
+     * @return
+     */
+    public Long getPayTimes(Integer userId) {
+        QueryWrapper<PayPojo> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("user_id", userId);
+        Long aLong = payRepository.selectCount(queryWrapper);
+        return aLong;
+    }
+
 
 }

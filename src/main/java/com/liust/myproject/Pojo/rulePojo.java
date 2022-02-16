@@ -1,5 +1,7 @@
 package com.liust.myproject.Pojo;
 
+import com.baomidou.mybatisplus.annotation.DbType;
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -22,7 +24,7 @@ import java.util.Date;
 @TableName("rule")
 public class rulePojo {
     //表id
-    @TableId
+    @TableId(type = IdType.AUTO)
     private Integer ruleId;
     //创建时间
     @JsonFormat(pattern = "yyyy-MM-dd hh:MM:ss", locale = "zh", timezone = "GMT+8")
