@@ -7,23 +7,23 @@ import lombok.ToString;
 
 import java.io.Serializable;
 
-/**
- * @author liuyulong
- * @create 2022-02-15 9:06
- * @create 2022-二月  星期二
- * @project MyProject
- */
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class R implements Serializable {
+public class R  {
     private Integer code;
     private String msg;
     private Object data;
 
     public static R setResult(Object data,MyHttpState httpState){
         return new R(httpState.getCode(),httpState.getMsg(),data);
+    }
+
+    public static R valueIsNull(Object data){
+        MyHttpState myHttpState =MyHttpState.Value_Null;
+        return new R(myHttpState.getCode(),myHttpState.getMsg(),data);
     }
 
 }

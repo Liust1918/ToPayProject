@@ -1,5 +1,6 @@
 package com.liust.myproject.MyException;
 
+import com.fasterxml.jackson.databind.exc.MismatchedInputException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.HttpMediaTypeException;
@@ -13,12 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.LinkedHashMap;
 
-/**
- * @author liuyulong
- * @create 2022-02-15 12:01
- * @create 2022-二月  星期二
- * @project MyProject
- */
+
 @RestControllerAdvice
 public class ControllerHandlerException {
 
@@ -38,4 +34,14 @@ public class ControllerHandlerException {
         return map;
     }
 
+    @ExceptionHandler(MismatchedInputException.class)
+    Object MyMismatchedInputException(Exception e){
+        LinkedHashMap<String, Object> map = new LinkedHashMap<>();
+        map.put("code", 9000);
+        map.put("msg", "你没有输入json内容");
+        map.put("exception", e.getClass().getSimpleName());
+        map.put("msgException", e.getMessage());
+        logger.error("没有输入json内容", e);
+        return map;
+    }
 }

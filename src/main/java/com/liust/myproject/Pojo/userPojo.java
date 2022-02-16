@@ -7,19 +7,16 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import java.util.Date;
 
-/**
- * @author liuyulong
- * @create 2022-02-15 0:59
- * @create 2022-二月  星期二
- * @project MyProject
- */
+
 //用户表
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 @TableName("user")
 public class userPojo {
     //用户id
@@ -29,7 +26,6 @@ public class userPojo {
     @JsonFormat(pattern = "yyyy-MM-dd hh:MM:ss", locale = "zh", timezone = "GMT+8")
     private Date createAt;
     //用户密码
-    @JsonIgnore
     private String password;
     //用户名
     private String username;

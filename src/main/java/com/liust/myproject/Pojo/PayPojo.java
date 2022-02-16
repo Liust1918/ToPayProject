@@ -10,21 +10,17 @@ import lombok.ToString;
 import org.springframework.format.annotation.DateTimeFormat;
 import sun.dc.pr.PRError;
 
+import java.io.Serializable;
 import java.util.Date;
 
-/**
- * @author liuyulong
- * @create 2022-02-15 0:59
- * @create 2022-二月  星期二
- * @project MyProject
- */
+
 //支付记录表
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
 @TableName("mypay")
-public class PayPojo {
+public class PayPojo implements Serializable {
     //    支付记录id
     @TableId(type = IdType.AUTO)
     private Integer payId;

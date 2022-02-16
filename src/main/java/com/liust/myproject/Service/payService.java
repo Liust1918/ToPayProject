@@ -13,12 +13,7 @@ import javax.annotation.Resource;
 import java.util.List;
 import java.util.stream.Collectors;
 
-/**
- * @author liuyulong
- * @create 2022-02-15 10:33
- * @create 2022-二月  星期二
- * @project MyProject
- */
+
 @Service
 @Transactional(propagation = Propagation.NOT_SUPPORTED,readOnly = true)
 public class payService {
@@ -29,38 +24,37 @@ public class payService {
     private payRepository payRepository;
 
     /**
-     * 支付
+     * 退款功能
      * @param payPojo
      * @return
      */
     @Transactional(rollbackFor = Exception.class)
-    public String toPayTransactional(PayPojo payPojo){
+    public String toSaveTransactional(PayPojo payPojo){
         Integer userId = payPojo.getUserId();
         Double allValue = getAllValue(userId);
-        Double payValue = payPojo.getPayValue();
-
-
-        double all = allValue - payValue;
+        Double saveValue = payPojo.getPayValue();
+        double all = allValue - saveValue;
         if(all<0){
             logger.info("用户:"+payPojo.getUserId()+"余额不足");
             throw new RuntimeException("用户:"+payPojo.getUserId()+"余额不足");
         }
-
         int insert = payRepository.insert(payPojo);
         return String.valueOf(payPojo.getPayId());
     }
 
 
     /**
-     * 存钱
+     * 支付功能
      * @param payPojo
      * @return
      */
     @Transactional(rollbackFor = Exception.class)
-    public String toSaveTransactional(PayPojo payPojo){
+    public String toPayTransactional(PayPojo payPojo){
+        Integer userId = payPojo.getUserId();
         int insert = payRepository.insert(payPojo);
         return String.valueOf(payPojo.getPayId());
     }
+
 
 
     /**
@@ -71,14 +65,14 @@ public class payService {
     public Double getAllValue(Integer user_id) {
         Double PayOfValue = getALLSaveOrPayOfValue(user_id, true);
         Double SaveOfValue = getALLSaveOrPayOfValue(user_id, false);
-        Double value=SaveOfValue-PayOfValue;
+        Double value=PayOfValue-SaveOfValue;
         return value;
     }
 
 
     /**
      * 统计扣钱/加钱的统计
-     * true为扣钱统计，false为加钱统计
+     * true为支付统计，false为退款统计
      * @param user_id
      * @param isPay
      * @return

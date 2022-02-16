@@ -1,17 +1,13 @@
 package com.liust.myproject.MyStatusCode;
 
-/**
- * @author liuyulong
- * @create 2022-02-15 9:07
- * @create 2022-二月  星期二
- * @project MyProject
- */
+
 public enum MyHttpState {
 
-    Successful_Run(2000,"运行成功");
+    Successful_Run(2000,"运行成功"),
+    Value_Null(5000,"数据为空");
 
-    private Integer code;
-    private String msg;
+    private final Integer code;
+    private final String msg;
 
     MyHttpState(Integer code, String msg) {
         this.code = code;
